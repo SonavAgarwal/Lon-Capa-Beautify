@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Lon Capa Beautify Options</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"/>
+        <style>
+            * {
+                font-family: "Open Sans", sans-serif;
+            }
+
+            h3 {
+                margin-bottom: 20px;
+            }
+
+            #bigDiv {
+                margin-top: 2em !important;
+                background-color: white !important;
+                width: 85% !important;
+                margin-left: 7.5% !important;
+                border-radius: 0.3em !important;
+                border: 0.05em solid white !important;
+                box-shadow: 0px 0px 0.6em -0.2em black !important;
+                display: block !important;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id = "bigDiv">
+            <div style = "width: 100%; height: 100%; padding: 3%;">
+                <!-- <label><h3>Load animation:</h3><input type="checkbox" id="animation"></label> -->
+
+                <label><h3>Confetti on correct answer:</h3><input type="checkbox" id="confetti"></label>
+                
+                <div id="status"></div>
+                <button id="save" style = "margin-top: 20px;">Save</button>
+            </div>
+            
+
+        </div>
+        
+        
+
+
+        <script src = "options.js"></script>
+    </body>
+</html>

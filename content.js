@@ -1,3 +1,39 @@
+var doConfetti;
+
+chrome.storage.sync.get({
+    conf: true
+}, function(items) {
+    doConfetti = items.conf;
+    try {
+        if (!doConfetti) throw "naw";
+        if (document.getElementsByName("lonhomework").length == 0) {
+            chrome.storage.sync.set({
+                previousNumberCorrect: 1000,
+                previousLocation: document.title
+            }, function() {
+                //coming from not homework page
+            });
+        } else {
+            var correctCount = document.getElementsByClassName("LC_answer_correct").length;
+            chrome.storage.sync.get({
+                previousNumberCorrect: 0,
+                previousLocation: "hello"
+            }, function(items) {
+                if (correctCount > items.previousNumberCorrect && document.title == items.previousLocation) showConfetti();
+            });
+            chrome.storage.sync.set({
+                previousNumberCorrect: correctCount,
+                previousLocation: document.title
+            }, function() {
+                //incremented now
+            });
+        }
+        
+    } catch (error) {
+        //confetti oofed
+    }
+});
+
 try {
     var newHeader = document.createElement("div");
     var classTitle = document.createElement("div");
@@ -162,4 +198,21 @@ try {
     })
 } catch (error) {
     //no arrows
+}
+
+function showConfetti() {
+    var canv = document.createElement("canvas");
+    canv.id = "confetti-canvas";
+    canv.width = window.innerWidth;
+    canv.height = window.innerHeight;
+    canv.style.position = "fixed";
+    canv.style.width = "100vw";
+    canv.style.height = "100vh";
+    canv.style.top = "0";
+    canv.style.left = "0";
+    canv.style.zIndex = "1000";
+    canv.style.pointerEvents = "none";
+    document.body.appendChild(canv);
+    startConfetti(1500, 100, 200);
+    // window.setTimeout(stopConfetti, 1000);
 }
