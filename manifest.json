@@ -2,7 +2,7 @@
   "manifest_version": 2,
  
   "name": "Lon Capa Beautify",
-  "version": "0.0.3.0",
+  "version": "0.0.4.1",
   "description": "Make science cooler",
   "icons": {"128": "LCB.png"},
   "content_scripts": [{

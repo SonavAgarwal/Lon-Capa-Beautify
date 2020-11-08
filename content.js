@@ -1,38 +1,42 @@
 var doConfetti;
 
-chrome.storage.sync.get({
-    conf: true
-}, function(items) {
-    doConfetti = items.conf;
-    try {
-        if (!doConfetti) throw "naw";
-        if (document.getElementsByName("lonhomework").length == 0) {
-            chrome.storage.sync.set({
-                previousNumberCorrect: 1000,
-                previousLocation: document.title
-            }, function() {
-                //coming from not homework page
-            });
-        } else {
-            var correctCount = document.getElementsByClassName("LC_answer_correct").length;
-            chrome.storage.sync.get({
-                previousNumberCorrect: 0,
-                previousLocation: "hello"
-            }, function(items) {
-                if (correctCount > items.previousNumberCorrect && document.title == items.previousLocation) showConfetti();
-            });
-            chrome.storage.sync.set({
-                previousNumberCorrect: correctCount,
-                previousLocation: document.title
-            }, function() {
-                //incremented now
-            });
+try {
+    chrome.storage.sync.get({
+        conf: true
+    }, function(items) {
+        doConfetti = items.conf;
+        try {
+            if (!doConfetti) throw "naw";
+            if (document.getElementsByName("lonhomework").length == 0) {
+                chrome.storage.sync.set({
+                    previousNumberCorrect: 1000,
+                    previousLocation: document.title
+                }, function() {
+                    //coming from not homework page
+                });
+            } else {
+                var correctCount = document.getElementsByClassName("LC_answer_correct").length;
+                chrome.storage.sync.get({
+                    previousNumberCorrect: 0,
+                    previousLocation: "hello"
+                }, function(items2) {
+                    if (correctCount > items2.previousNumberCorrect && document.title == items2.previousLocation) showConfetti();
+                });
+                chrome.storage.sync.set({
+                    previousNumberCorrect: correctCount,
+                    previousLocation: document.title
+                }, function() {
+                    //incremented now
+                });
+            }
+            
+        } catch (error) {
+            //confetti oofed
         }
-        
-    } catch (error) {
-        //confetti oofed
-    }
-});
+    });
+} catch (errorout) {
+    //no
+}
 
 try {
     var newHeader = document.createElement("div");
